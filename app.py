@@ -75,7 +75,7 @@ for uploaded_file in uploaded_files:
   conversations = chatgpt_conversation(conversations)
   output_text = conversations[-1]['content']
   st.write(uploaded_file.name)
-  st.write(output_text)
+  #st.write(output_text)
   end = time.time()
   st.write("Time to generate: " + str(round(end-start,2)) + " seconds")
   total_output = total_output + output_text + "\n\n"
@@ -93,3 +93,4 @@ if total_output != "":
   end = time.time()
   st.write("Time to generate: " + str(round(end-start,2)) + " seconds")
   st.divider()
+  st.download_button(":scroll:", total_output)
