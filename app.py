@@ -56,7 +56,7 @@ instruction2_template = "You are my writing assistant. Synthesize an article fro
 instruction1 = st.text_area("**Enter** the 1st instruction to extract from each article.", value = instruction1_template)
 instruction2 = st.text_area("**Enter** the 2nd instruction to blend all of the articles.", value = instruction2_template)
 
-uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. Lemgth limit is around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
+uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. My length limit is around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
 total_output = ""
 for uploaded_file in uploaded_files:
   raw_text = ""
