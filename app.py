@@ -77,7 +77,7 @@ for uploaded_file in uploaded_files:
   #st.write(uploaded_file.name)
   #st.write(output_text)
   end = time.time()
-  st.write(uploaded_file.name + " (" + str(round(end-start,2)) + " seconds)")
+  st.write(uploaded_file.name + " (" + str(round(end-start,2)) + " second)")
   total_output = total_output + output_text + "\n\n"
 
 if total_output != "":
