@@ -88,7 +88,7 @@ if total_output != "":
   conversations = chatgpt_conversation(conversations)
   article = conversations[-1]['content']
   end = time.time()
-  st.write("**Blended Article** + " (" + str(round(end-start,2)) + " seconds)")
+  st.write("**Blended Article**" + " (" + str(round(end-start,2)) + " seconds)")
   st.write(article)
   st.divider()
   st.download_button(":scroll:", article)
