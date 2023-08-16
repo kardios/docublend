@@ -9,6 +9,9 @@ openai.api_key = API_KEY
 temperature = 0
 model_id = "gpt-3.5-turbo-16k"
 
+instruction1 = "You are my reading assistant. You will read the text I provide and summarize into bullet points. Identify the main ideas and key details in the text, and condense them into concise bullet points. Recognize the overall structure of the text and create bullet points that reflect this structure. The output should be presented in a clear and organized way. Do not start with any titles."
+instruction2 = "You are my writing assistant. Synthesize an article from the bullet points I provide."
+
 def estimate_tokens(text, method="max"):
   # method can be "average", "words", "chars", "max", "min", defaults to "max"
   # "average" is the average of words and chars
@@ -51,6 +54,7 @@ def chatgpt_conversation(conversation_log):
 st.write("**DocuBlend** Beta : AI-Powered Document Blender by **Sherwood Analytica**")
 
 uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. Due to the limitation of my context window, I will only read up to around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
+total_output = ""
 for uploaded_file in uploaded_files:
   raw_text = ""
   doc_reader = PdfReader(uploaded_file)
@@ -63,12 +67,26 @@ for uploaded_file in uploaded_files:
   
   start = time.time()
   conversations = []
-  conversations.append({'role': 'system', 'content': "You are my reading assistant. You will read the text I provide and summarize into bullet points. Identify the main ideas and key details in the text, and condense them into concise bullet points. Recognize the overall structure of the text and create bullet points that reflect this structure. The output should be presented in a clear and organized way. Do not start with any titles."})
+  conversations.append({'role': 'system', 'content': instruction1})
   conversations.append({'role': 'user', 'content': raw_text})
   conversations = chatgpt_conversation(conversations)
   output_text = conversations[-1]['content']
-  st.write("**Main Points**")
+  st.write(uploaded_file.name)
   st.write(output_text)
+  end = time.time()
+  st.write("Time to generate: " + str(round(end-start,2)) + " seconds")
+  total_output = total_output + output_text + "\n\n"
+  st.divider()
+
+if total_output != "":
+  start = time.time()
+  conversations = []
+  conversations.append({'role': 'system', 'content': instruction2})
+  conversations.append({'role': 'user', 'content': instruction2 + ":\n\n" + output_text_html})
+  conversations = chatgpt_conversation(conversations)
+  article = conversations[-1]['content']
+  st.write("**Blended Article**")
+  st.write(article)
   end = time.time()
   st.write("Time to generate: " + str(round(end-start,2)) + " seconds")
   st.divider()
