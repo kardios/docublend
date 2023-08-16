@@ -50,7 +50,7 @@ def chatgpt_conversation(conversation_log):
 
 st.write("**DocuBlend** Beta : AI-Powered Document Blender by **Sherwood Analytica**")
 
-uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to analyse for you. Up to 10,000 words per document will be read and the remainder will be truncated.", type = "pdf", accept_multiple_files = True)
+uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. Due to the limitation of my context window, I will only read up to around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
 for uploaded_file in uploaded_files:
   raw_text = ""
   doc_reader = PdfReader(uploaded_file)
