@@ -9,9 +9,6 @@ openai.api_key = API_KEY
 temperature = 0
 model_id = "gpt-3.5-turbo-16k"
 
-instruction1 = "You are my reading assistant. You will read the text I provide and summarize into bullet points. Identify the main ideas and key details in the text, and condense them into concise bullet points. Recognize the overall structure of the text and create bullet points that reflect this structure. The output should be presented in a clear and organized way. Do not start with any titles."
-instruction2 = "You are my writing assistant. Synthesize an article from the bullet points I provide."
-
 def estimate_tokens(text, method="max"):
   # method can be "average", "words", "chars", "max", "min", defaults to "max"
   # "average" is the average of words and chars
@@ -53,7 +50,13 @@ def chatgpt_conversation(conversation_log):
 
 st.write("**DocuBlend** Beta : AI-Powered Document Blender by **Sherwood Analytica**")
 
-uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. Due to the limitation of my context window, I will only read up to around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
+instruction1_template = "You are my reading assistant. You will read the text I provide and summarize into bullet points. Identify the main ideas and key details in the text, and condense them into concise bullet points. Recognize the overall structure of the text and create bullet points that reflect this structure. The output should be presented in a clear and organized way. Do not start with any titles."
+instruction2_template = "You are my writing assistant. Synthesize an article from the bullet points I provide."
+
+instruction1 = st.text_area("**Enter** the 1st instruction to extract from each article.", value = instruction1_template)
+instruction2 = st.text_area("**Enter** the 2nd instruction to blend all of the articles.", value = instruction2_template)
+
+uploaded_files = st.file_uploader("**Upload** the PDF documents you would like me to blend for you. Lemgth limit is around 10,000 words per document.", type = "pdf", accept_multiple_files = True)
 total_output = ""
 for uploaded_file in uploaded_files:
   raw_text = ""
