@@ -82,7 +82,7 @@ if total_output != "":
   start = time.time()
   conversations = []
   conversations.append({'role': 'system', 'content': instruction2})
-  conversations.append({'role': 'user', 'content': instruction2 + ":\n\n" + output_text_html})
+  conversations.append({'role': 'user', 'content': instruction2 + ":\n\n" + total_output})
   conversations = chatgpt_conversation(conversations)
   article = conversations[-1]['content']
   st.write("**Blended Article**")
