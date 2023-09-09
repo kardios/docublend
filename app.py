@@ -48,7 +48,7 @@ def chatgpt_conversation(conversation_log):
   })
   return conversation_log
 
-st.write("**DocuBlend** : AI-Powered Document Blender by **Sherwood Analytica**")
+st.write("**Docublend** : AI-Powered Document Blender by **Sherwood Analytica**")
 
 instruction1_template = "You are my reading assistant. You will read the text I provide and summarize into bullet points. Identify the main ideas and key details in the text, and condense them into concise bullet points. Recognize the overall structure of the text and create bullet points that reflect this structure. The output should be presented in a clear and organized way. Do not start with any titles."
 instruction2_template = "You are my writing assistant. Synthesize an article from the bullet points I provide."
