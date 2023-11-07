@@ -7,7 +7,7 @@ from PyPDF2 import PdfReader
 API_KEY = os.environ["OPENAI_KEY"]
 openai.api_key = API_KEY
 temperature = 0
-model_id = "gpt-3.5-turbo-16k"
+model_id = "gpt-3.5-turbo-1106"
 
 def estimate_tokens(text, method="max"):
   # method can be "average", "words", "chars", "max", "min", defaults to "max"
